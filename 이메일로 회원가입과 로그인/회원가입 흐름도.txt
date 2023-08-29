@@ -1,0 +1,82 @@
+email로 회원가입 [기능 - Router] 
+
+1. 회원 정보 입력 - (기본 경로)http://localhost:8081/api/user
+
+input으로 정보들을 받는다. 
+
+{
+    이메일: _email,
+    비밀번호: _password,
+    이름: _name,
+    핸드폰: _phone,
+    성별: _gender,
+    국가: _nation
+}
+
+2. 이메일 중복 확인 - /emailCheck [post]
+
+입력받은 email 값을 DB에 조회하여 존재하는 이메일인지 확인한다. 
+
+    2-1. DB에 존재하는 email값인지 확인하는 시퀄라이즈 쿼리 
+
+    User.findOne({
+        attributes: ['email'],
+        where: {
+            email: _email,
+        }
+    })
+
+    2-2. 중복 여부 확인 
+
+    if(!userEmail) { // DB에 존재하지 않는 이메일일 경우 
+        res.send({
+            messsage: 'Available Email Account',
+        })
+    } else { // DB에 존재하는 email일 경우 
+        res.send({
+            messsage: 'Exist Email Account',
+        })
+    }
+
+3. 이메일 인증 - /sendCode [post]
+
+Nodemailer 모듈을 사용하여 이메일 점유 코드 발송한다. 
+
+    3-1. 메일 옵션 설정 (보내는 이, 받는이, 제목, 내용 등)
+
+    let mailOption = {
+        from: /*보내는 사람 메일*/, 
+        to: email,
+        subject: /*인증 이메일 제목*/,
+        html: `인증번호를 입력해주세요 ${randomCode}`,
+    }
+
+    3-2. Nodemailer의 transporter 객체 사용해서 메일 보내기 
+    
+    transporter.sendMail(mailOption);
+
+4. 회원가입 - /regist [post]
+
+이메일 중복확인, 점유 코드 인증 확인이 끝난 후 나머지 회원 정보들과 함께 DB에 새로운 회원으로 등록한다. 
+
+    4-1. 비밀번호 암호화 
+
+    crypto 모듈을 사용하여 비밀번호를 암호화한다. 
+    
+    const salt = Math.round(new Date().valueOf() * Math.random()) + '';
+    const hashPassword = crypto
+        .createHash('sha256')
+        .update(password +salt)
+        .digest('hex');
+
+    4-2. DB에 insert하는 시퀄라이즈 쿼리 
+
+    User.create({
+        email: _email,
+        password: hashPassword,
+        name: _name,
+        phone: _phone,
+        gender: _gender,
+        nation: _nation,
+        salt: salt,
+    })

@@ -1,0 +1,117 @@
+- 이메일주소, 이메일 주소 유효성 검증 (→ 유효성 검증은 front에서 정규표현식으로)
+- 기존회원 가입여부 → db 호출
+- 이메일 주소 점유 확인 코드 발송, 점유 확인 코드 입력란
+- 비밀번호 입력, 비밀번호 가이드 일치 여부(8자리 이상, 영문 대/소문자, 특수기호, 숫자 포함 → front?)
+- 비밀번호 확인
+- 이름, 핸드폰 번호, 성별, 내/외국인 입력 
+- 가입하기 버튼
+
+
+[이메일로 회원가입]
+
+1.  input으로 이메일 주소를 받는다 
+
+2. 기존에 있는 회원인지 확인 
+
+    2-1. 들어온 값이 DB에 존재하는지 확인 후
+    
+    const input_email = req.body._email
+    const user_email = User.findOne({
+        attributes: ['email'],
+        where: {
+            email: input_email,
+        }
+    })
+
+    2-2. DB에 데이터가 존재하는지 확인 후 이메일 점유 확인 코드 발송 및 인증  
+
+    if (!user_email) { // 존재하지 않는 user일 때 
+        // 이메일 주소 점유 확인 코드 발송 
+
+        // 인증 코드 확인 후 나머지 회원 정보 입력
+
+    } else { // 이미 가입된 회원일 때 
+        // alert('이미 존재하는 회원입니다') → 로그인 페이지로 이동  
+    
+    }
+
+3. 비밀번호 확인 
+    
+    const input_password = req.body._password
+    const check_password = req.body._checkPassword
+    if (input_password == check_password) { // 비밀번호 확인 성공 
+        // DB에 신규 회원정보 등록 
+
+    } else { // 비밀번호 확인 실패 
+        // alert('비밀번호가 일치하지 않습니다. 다시 입력해주세요.')  
+    
+    }
+
+4. 이메일 인증, 비밀번호 확인이 끝나면 나머지 회원 정보 모두 DB 등록  
+    
+    const member = User.create({
+        email: input_email,
+        password: input_password, // 비밀번호 암호화
+        name: req.body._name,
+        phone: req.body._phone,
+        gender: req.body._gender,
+        nation: req.body._nation,
+    })
+
+
+---
+
+- 이메일과 비밀번호 입력 
+- 회원 DB 내 특이사항 여부 확인 (휴면회원, 탈퇴회원) 정보값 확인 및 처리 
+    - 휴면회원일 경우 계정 재활성화 
+    - 탈퇴 회원일 경우 로그인 불가 
+
+[이메일로 로그인]
+
+1. 입력받은 이메일 정보로 회원 상태 확인 (활동 회원, 휴면 회원, 탈퇴 회원) 
+
+    const user = findOne({ // User 테이블에서 입력한 이메일과 일치하는 데이터를 불러온다 
+        where: {
+            email: _email,
+        }
+    })
+
+    if(user.userStatus == 'active') {  // user 데이터의 userStatus가 active 상태이면 활동 회원
+        // 비밀번호 대조 
+
+    } else if(user.userStatus == 'inactive') {  // inactive 상태이면 휴면 회원
+        user.update({
+            userStatus: 'active',  // 휴면 회원은 로그인 시 활동 회원으로 상태 변경
+        }, {
+            where: { 
+                email: _email,
+            },
+        })
+    } else if (user.userStatus == 'withdrawal' ) { // withdrawal 상태이면 탈퇴 회원 
+        // alert('탈퇴한 회원입니다.') → 메인이나 회원가입 페이지로 이동 
+    
+    } else { // 아이디를 잘못 입력했을 경우 
+        // alert('존재하지 않는 회원입니다.')
+    
+    }
+
+2. 입력받은 이메일과 비밀번호 DB와 대조하여 로그인 성공/실패 
+
+    if(user.email == _email && user.password == _password) {
+        const loginSuccess = findAll({
+            where: {
+                user.email: user_email,
+                user.password: user_password,
+            },
+        })
+    } else {
+        // alert('로그인에 실패하였습니다.') → 로그인 페이지 redirect 
+        
+    }
+
+
+
+
+    
+
+
