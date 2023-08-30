@@ -1,0 +1,14 @@
+네이버 로그인 연동 해제 API
+→ 사용자가 서비스를 더이상 이용하지 않거나 (서비스 탈퇴) 네이버 로그인의 연동을 더이상 이용하지 않을 경우 
+
+    - 요청 URL: https://nid.naver.com/oauth2.0/token
+    * 요청 변수
+    - client_id, client_secret, access_token, grant_type(요청타입: delete)
+    
+    * 출력 결과
+    - access_token: 삭제 처리된 접근 토큰
+    - result: 처리 결과(success)
+
+* 연동 해제 API에 사용되는 접근토큰은 반드시 유효한 접근토큰을 이용
+    - 만료된 토큰이나 존재하지 않는 토큰으로 연동해제 불가
+    → 연동해제 수행 전 접근 토큰의 유효성을 점검하는 것을 권장

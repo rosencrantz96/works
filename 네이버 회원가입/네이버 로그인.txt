@@ -15,6 +15,8 @@
         * 요청 변수 
         - grant_type (발급: 'authorization_code'/갱신: 'refresh_token'/삭제: 'delete'), client_id, client_secret, code(리턴받은 인증코드 값: authorization_code), state
         - code, state: 발급 때 필수 
+        - refresh_token(사용자 인증에 성공하고 발급받은 갱신 토큰): 갱신 때 필수
+        - access_token(기 발급받은 접근 토큰, URL 인코딩을 적용한 값 사용), service_provider: 삭제 때 필수 
 
         * 응답 정보 
         - access_token(접근 토큰), token_type(접근 토큰의 타입: Bearer or MAC), expires_in(접근 토큰의 유효 기간), error(에러 코드), error_description(에러 메시지) 
