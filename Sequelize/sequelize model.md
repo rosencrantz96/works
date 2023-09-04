@@ -56,7 +56,7 @@ public static associate(db: any) {
 }
 ```
 > 다른 모델과의 관계
-- 다른 모델들과 연결할 떄 사용
+- 다른 모델들과 연결할 때 사용
 
 # primary key
 - 기본적으로 auto increment되는 primary key id를 넣어준다 (따로 적을 필요 x)
