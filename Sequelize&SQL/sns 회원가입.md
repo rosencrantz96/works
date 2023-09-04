@@ -32,7 +32,7 @@ const registUser = await User.create({
 const newUserSnsInfo = await SnsInfo.create({
     snsId: result.id,
     provider: 'kakao',
-    // 외래키 연결... 이게 되나? 
+    // 외래키 연결... 이게 되나? → 응 안됨
     userId: newUser.id,
 })
 ```
