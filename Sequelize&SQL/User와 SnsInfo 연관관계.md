@@ -14,5 +14,5 @@
 > ``snsInfo.belongTo(db.User, { foreignKey: 'userId', targetKey: 'id' })``
 
 
- → 'userId'라는 foreignKey를 생성: snsInfo의 테이블을 보면 user_id라는 이름의 컬럼(foreignKey)이 생성되어 있다 
+ → 'userId'라는 foreignKey를 생성: snsInfo의 테이블을 보면 user_id라는 이름의 컬럼(foreignKey)이 생성되어 있다 <br>
  → user의 sourceKey가 곧 snsInfo의 targetKey가 된다 
