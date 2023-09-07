@@ -1,3 +1,4 @@
+```SQL
 update snsinfo set sns_email = 'test@test.com' where id = 1;
 update snsinfo set sns_email = 'duplicate@test.com' where id = 3;
 
@@ -20,3 +21,4 @@ insert into snsinfo (sns_id, provider, created_at, updated_at) values ('sns연�
 insert into user (created_at, updated_at) select created_at, updated_at from snsinfo a where id (1) on duplicate key update created_at = a.created_at, updated_at = a.updated_at;
 -- 에러메시지: Error Code: 1305. FUNCTION crosscheck.id does not exist 
 -- 하아아 ㅅㅂ...
+```

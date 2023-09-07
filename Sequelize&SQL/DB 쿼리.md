@@ -1,3 +1,4 @@
+```SQL
 select * from crosscheck.user;
 select * from crosscheck.snsinfo;
 
@@ -24,3 +25,4 @@ on user.id = snsinfo.user_id;
 -- 참고한 사이트 
 -- http://www.webmadang.net/database/database.do?action=read&boardid=4001&page=1&seq=25 
 insert into user (email, name, phone, created_at, updated_at) select sns_email, sns_name, sns_mobile, created_at, updated_at from snsinfo;
+```
