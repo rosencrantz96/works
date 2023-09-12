@@ -24,7 +24,6 @@
     "gender": "여성",
     "nation": "한국"
 }
-// success
 ```
 - [x] 중복 이메일 방지 
 - [x] 필수 값입력 
@@ -42,27 +41,19 @@
     "email": "topgdvidsyb@gmail.com",
     "password": "1234"
 }
-// success (JWT 토큰 생성 완료)
 ```
 - [x] 비회원 로그인 테스트 
 - [x] 잘못된 비밀번호 테스트    
 --- 
 # `myPageController`
-- [ ] **2차 비밀번호 설정 테스트** 
+
+- [ ] **2차 비밀번호 인증 후 마이페이지 정보 불러오기** 
 ```json
 {
     "token": "",
     "secondaryPassword": "102938"
 }
 ```
-- [ ] 2차 비밀번호 설정하는 api가 없는 것 같아서 생성  
-    - [x] user 테이블에 2차 비밀번호 데이터 업데이트 
-    - [ ] 2차 비밀번호 암호화 (bcrypt 방식)
-
-<br>
-
-- [ ] **마이페이지 정보 불러오기** 
-
 <br>
 
 - [x] **마이페이지 update 테스트** 
@@ -74,7 +65,6 @@
     "gender": "여자",
     "nation": "미국"
 }
-// success 
 ```
 - [x] token 값이 없을 때 → json web token error / no login 
 - [x] 모든 값을 바꾸지 않을 때 → 바꾸고 싶은 정보만 update 성공 
@@ -86,13 +76,12 @@
 {
     "email": "topgdvidsyb@gmail.com",
     "name": "권수경",
-    "category": "IT 회사사",
+    "category": "IT 회사",
     "workName": "CROSSCHECK",
     "workAddress": "서울시 어쩌구",
     "purpose": "재태크",
     "sourceFunds": "근로소득"
 }
-// success 
 ```
 
 - [x] 직장정보 인서트
@@ -101,21 +90,52 @@
 --- 
 # `passwordController`
 
-- [ ] **비밀번호 초기화 테스트: resetPassword**
+- [x] **비밀번호 초기화 테스트: resetPassword**
 ```json
 {
     "email": "topgdvidsyb@gmail.com",
     "code": "870465",
     "newPassword": "102938"
 }
-// success 
 ```
 - [x] resetCode가 없을 때 비밀번호 변경 실패 확인 
 - [x] 잘못된 코드를 입력했을 때 
 - [x] resetCode가 있을 때 
     - [x] 비밀번호 변경 확인 (이전 비밀번호 && 바뀐 비밀번호 로그인 확인)
     - [x] passwordReset 테이블 destroy 확인 
-    
+
 <br />
 
-- [ ] **비밀번호 재설정 테스트: updatePassword**
+- [x] **비밀번호 재설정 테스트: updatePassword**
+```json
+{
+    "token": "",
+    "password": "1234"
+}
+```
+
+<br />
+
+- [x] **2차 비밀번호 설정 테스트: setSecondaryPassword** 
+```json
+{
+    "token": "",
+    "secondaryPassword": "102938"
+}
+```
+
+- [x] 2차 비밀번호 설정하는 api가 없는 것 같아서 생성  
+    - [x] user 테이블에 2차 비밀번호 데이터 업데이트 
+    - [x] 2차 비밀번호 암호화 (bcrypt 방식)
+    - [ ] salt값이 공개되어도 되는지... 모르겠다 
+
+---
+# `withdrawController`
+```json
+{
+    "token": ""
+}
+```
+- [x] 회원 정보 삭제 
+    - [x] USER 테이블 정보 삭제
+    - [x] 연관 테이블(workInfo) 삭제 확인 (onDelete: 'CASCADE' 설정이 다른 연관 테이블 설정에 가 있었음)
