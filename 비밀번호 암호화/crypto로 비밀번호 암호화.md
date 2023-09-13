@@ -89,3 +89,5 @@ crypto.pbkdf2(password, salt, 9999, 64, 'sha512', function(err, hashed) {
         }
       })
 ```
+> 참고 사이트 <br>
+https://velog.io/@kaitlin_k/%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%A9%EC%8B%9D
