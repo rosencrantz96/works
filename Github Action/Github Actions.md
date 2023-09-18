@@ -9,7 +9,8 @@
 
 - `Job`: 그룹의 역할<br>
 → 여러 Step으로 구성, 단일 가상 환경 제공 <br>
-→ 다른 Job에 의존 관계를 가질 수도 있고, 독립적으로 병렬로 실행될 수도 있음 
+→ 다른 Job에 의존 관계를 가질 수도 있고, 독립적으로 병렬로 실행될 수도 있음 <br>
+→ 필수적으로 정의해야 할 속성: `runs-on`과 `step`
 
 - `Step`: Job안에서 순차적으로 실행되는 프로세스 단위 <br>
 → 파일 시스템을 통해 서로 정보를 공유, 교환 <br>
@@ -117,7 +118,7 @@ jobs: ## job 들을 명시
                     restore-keys: |
                         ${{ runner.os }}-yarn-
     ```
-    - ✅ `jobs.<job_id>.runs-on **Required**`: 해당 job을 실행할 컴퓨팅 자원(runner)을 명시 (어떤 OS에서 실행할 것인지 명시)
+    - ✅ `jobs.<job_id>.runs-on **Required**`: 해당 **job을 실행할** 컴퓨팅 자원(**runner**)을 명시 (어떤 OS에서 실행할 것인지 명시)
 
     - ✅ `jobs.<job_id>.strategy`: strategy는 jobs가 여러 환경에서의 테스트/배포 등을 위해 build matrix를 설정
         -  다른 환경(다른 Nodejs 버전) 들을 명시해 여러 환경에서의 같은 jobs를 동시에 실행
