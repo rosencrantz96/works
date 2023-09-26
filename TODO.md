@@ -2,7 +2,7 @@
 
 (B) RESTful API 적용 - PATCH {cm:2023-09-26}
 
-(C) Redis
+(C) Redis {cm:2023-09-26}
 
 (D) multer 업로드 (테이블 정리)
 
