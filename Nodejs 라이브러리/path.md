@@ -18,7 +18,7 @@ path.resolve(); // 절대경로 존중
 
 : 파일의 확장자명을 반환
 
-## `path.dirname('filePath)`
+## `path.dirname('filePath')`
 
 : 파일의 디렉토리 주소를 반환
 
