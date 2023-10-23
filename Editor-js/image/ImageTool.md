@@ -54,7 +54,7 @@ uploader 의 응답은 **Uploading files from device** 섹션에서 설명한 �
 
 ### Uploading by drag-n-drop or from Clipboard
 
-당신의 백엔드는 `config.field`로 지정된(by default, `imgage`) 필드 이름의 FormData 객체로 파일을 받을것이다. 이를 저장하고 위에서 설명했던것과 같은 응답 포맷으로 리턴해야 한다.
+당신의 백엔드는 `config.field`로 지정된(by default, `image`) 필드 이름의 FormData 객체로 파일을 받을것이다. 이를 저장하고 위에서 설명했던것과 같은 응답 포맷으로 리턴해야 한다.
 
 ## 참고 문서
 
